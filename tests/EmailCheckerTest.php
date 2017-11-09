@@ -48,13 +48,8 @@ class EmailCheckerTest extends \PHPUnit_Framework_TestCase
     public function testDisposableEmail()
     {
         $result = $this->checker->verify('test@mailinator.com');
-        $this->assertEquals($result['result'], 'invalid');
-    }
-
-    public function testDisposableEmailWithAllowDisposable()
-    {
-        $result = $this->checker->verify('test@mailinator.com', true);
         $this->assertEquals($result['result'], 'valid');
+        $this->assertTrue($result['disposable']);
     }
 
     private function generateRandomString($length = 10)
