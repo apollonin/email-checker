@@ -29,10 +29,11 @@ class EmailChecker
 	 * Main function for validate email
 	 *
 	 * @param string $email
+	 * @param boolean $allow_disposable
 	 *
 	 * @return array
 	 */
-	public function verify($email = '')
+	public function verify($email = '', $allow_disposable = false)
 	{
 		if (empty($email))
 			throw new EmptyEmailException();
@@ -43,7 +44,14 @@ class EmailChecker
 		if (!array_key_exists('host', $this->config))
 			throw new BadConfigException();
 
-		$ch = curl_init($this->config['host'] . '/api/v1/verify?email=' . $email);
+		$query = ['email' => $email];
+
+		if ($allow_disposable)
+			$query['allow_disposable'] = 'true';
+
+		$url = $this->config['host'] . '/api/v1/verify?' . http_build_query($query);
+
+		$ch = curl_init($url);
 
 		curl_setopt_array($ch, [
 			CURLOPT_HEADER => 0,

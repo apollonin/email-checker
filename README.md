@@ -58,14 +58,22 @@ $result = $checker->verify('test@gmail.com');
 ```
 
 
+If you want consider disposable emails as valid, pass $allow_disposable as true:
+
+```
+$result = $checker->verify('test@gmail.com', true);
+```
+
+
 ### Response
 
 Validation response has next fields:
 
 * email - validated email
-* result - result of validation (boolean value true or false)
-* reason - invalid email explanation (optional, if result was false)
-* suggested - if email valid, but not working, this option show presumptive email (optional, if any suggestion was proposed)
+* result - result of validation (valid, invalid or unknown)
+* reason - invalid email explanation (optional, if result was invalid)
+* disposable - if this email relates to some disposable (one-time) email services
+* did_you_mean - if email valid, but not working, this option show presumptive email (optional, if any suggestion was proposed)
 
 
 #### Example (with default config)
