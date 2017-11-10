@@ -58,13 +58,6 @@ $result = $checker->verify('test@gmail.com');
 ```
 
 
-If you want consider disposable emails as valid, pass $allow_disposable as true:
-
-```
-$result = $checker->verify('test@gmail.com', true);
-```
-
-
 ### Response
 
 Validation response has next fields:
